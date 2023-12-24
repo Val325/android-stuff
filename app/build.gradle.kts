@@ -15,6 +15,7 @@ android {
         // Defines the minimum API level required to run the app.
         minSdk = 21
 
+
         // Specifies the API level used to test the app.
         targetSdk = 34
 
@@ -38,6 +39,8 @@ android {
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.code.gson:gson:2.8.5")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
 
