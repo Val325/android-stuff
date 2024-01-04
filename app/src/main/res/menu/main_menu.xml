@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/add_note"
+        android:id="@+id/filter_min"
         android:orderInCategory="1"
-        android:title="Add note" />
+        android:title="@string/sort_min" /> 
+    <item
+        android:id="@+id/filter_max"
+        android:orderInCategory="2"
+        android:title="@string/sort_max" />
+
+    <item
+        android:id="@+id/add_note"
+        android:orderInCategory="3"
+        android:title="@string/add_note" />
+
+
+    <item 
+        android:id="@+id/lan_select" 
+        android:title="@string/languages_submenu"
+        android:orderInCategory="4">
+        <menu> 
+            <item android:id="@+id/lan_select_one" android:title="@string/eng_submenu" /> 
+            <item android:id="@+id/lan_select_two" android:title="@string/ua_submenu" /> 
+        </menu> 
+    </item> 
 
 </menu>

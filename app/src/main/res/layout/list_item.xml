@@ -9,6 +9,7 @@
         android:id="@+id/icon"
         android:layout_width="70dp"
         android:layout_height="50dp"
+        android:paddingLeft="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/title"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,9 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:text="title"
+        android:paddingLeft="50dp"
+        android:text="@string/title_hint"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"    
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/time" />
  
@@ -29,7 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:text="text_data"
+        android:paddingLeft="50dp"
+        android:text="@string/text_data"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time"
@@ -40,9 +43,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
+        android:paddingLeft="50dp"
         android:text="time_now"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintBottom_toBottomOf="@+id/text" /> 
+        app:layout_constraintBottom_toBottomOf="@+id/text" />
+    <TextView
+        android:id="@+id/importance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:paddingLeft="200dp"
+        android:text="importance"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="@+id/text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

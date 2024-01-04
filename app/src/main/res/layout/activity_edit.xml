@@ -8,7 +8,7 @@
 
 
 <EditText
-    android:id="@+id/title_text"
+    android:id="@+id/title_edit"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:inputType="textMultiLine"
@@ -20,11 +20,11 @@
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/note_text"
+    app:layout_constraintBottom_toTopOf="@+id/note_edit"
 />
 
 <EditText
-    android:id="@+id/note_text"
+    android:id="@+id/note_edit"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:inputType="textMultiLine"
@@ -32,40 +32,19 @@
     android:minLines="4"
     android:maxLines="4"
     android:gravity="top"
-    android:hint="@string/edit_note"
-    app:layout_constraintTop_toBottomOf="@+id/title_text"
+    android:hint="@string/note_hint"
+    app:layout_constraintTop_toBottomOf="@+id/title_edit"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
 />
-    <RadioGroup
-        android:id="@+id/select_importance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/note_text"
-        >
- 
-        <RadioButton android:id="@+id/low_importance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/low_important" />
-        <RadioButton android:id="@+id/middle_importance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mid_important" />
-        <RadioButton android:id="@+id/top_importance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/top_important" />
-    </RadioGroup>
+
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btn_edit"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="@string/add_note"
-        android:onClick="sendMessage"
-        app:layout_constraintTop_toTopOf="@+id/select_importance"
+        android:text="@string/edit_note"
+        android:onClick="editMessage"
+        app:layout_constraintTop_toTopOf="@+id/note_edit"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

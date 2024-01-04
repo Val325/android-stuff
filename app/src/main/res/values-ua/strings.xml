@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Notes app</string>
+    <string name="hello_msg">Нотатки</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="sort_max">Сортування по максимуму</string>
+    <string name="sort_min">Сортування по мінімуму</string>
+    <string name="add_note">Додати нотатку</string>
+    <string name="edit_note">Редагувати нотатку</string>
+    <string name="delete_note">Видалити нотатку</string>
+    <string name="title_hint">Заголовок нотатки</string>
+    <string name="note_hint">Нотатка</string>
+    <string name="top_important">Найважніше</string>
+    <string name="mid_important">Менш важніше</string>
+    <string name="low_important">Найменш важніше</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="text_data">text</string>
+    <string name="time_now">time_now</string>
+    <string name="importance">importance</string>
+    <string name="languages_submenu">Мови</string>
+    <string name="eng_submenu">Англійська</string>
+    <string name="ua_submenu">Українська</string>
+    <string name="search">Пошук</string>
+</resources>
