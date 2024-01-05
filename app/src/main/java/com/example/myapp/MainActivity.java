@@ -71,6 +71,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteOpenHelper;
+
 class NumberComparatorMinToMax implements Comparator<Note> {
    @Override
    public int compare(Note o1, Note o2) {
@@ -316,11 +317,8 @@ class DBHandler extends SQLiteOpenHelper {
  
     // this method is use to add new course to our sqlite database.
     public void addPost(String titleData, String textData, String timeData, String pathimgData, int important) {
-         
         SQLiteDatabase db = this.getWritableDatabase();
-         
-        ContentValues values = new ContentValues();
-         
+
         ContentValues cv = new ContentValues();
         cv.put("title", titleData);
         cv.put("text", textData);
@@ -328,44 +326,42 @@ class DBHandler extends SQLiteOpenHelper {
         cv.put("importance", important);
         cv.put("pathimg", pathimgData);
         db.insert(TABLE, null, cv);
-
-
         db.close();
     }
+    public void editPost(String namePost, Note selNote){
+        SQLiteDatabase db = this.getWritableDatabase();
 
-    // we have created a new method for reading all the courses.
+        ContentValues cv = new ContentValues();
+        cv.put("title", selNote.getTitle());
+        cv.put("text", selNote.getText());
+        cv.put("time", selNote.getTime());
+        cv.put("importance", selNote.getImportance());
+        cv.put("pathimg", selNote.getImagePath());
+        db.update(TABLE, cv, "title=?", new String[]{namePost});
+        db.close();
+    }
+    public void deletePost(String namePost){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE, "title=?", new String[]{namePost});
+        db.close();
+    }
     public ArrayList<Note> getDataPosts(){
-    // on below line we are creating a
-    // database for reading our database.
-    SQLiteDatabase db = this.getReadableDatabase();
- 
-    // on below line we are creating a cursor with query to
-    // read data from database.
-    Cursor cursorPosts = db.rawQuery("SELECT * FROM " + TABLE, null);
- 
-    // on below line we are creating a new array list.
-    ArrayList<Note> postsData = new ArrayList<>();
- 
-    // moving our cursor to first position.
-    if (cursorPosts.moveToFirst()) {
-        do {
-            // on below line we are adding the data from
-            // cursor to our array list.
-            //  new Note(editTitle.getText().toString(), editNote.getText().toString(), timeStamp, imagePath, 3);  
-            postsData.add(new Note(
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursorPosts = db.rawQuery("SELECT * FROM " + TABLE, null);
+        ArrayList<Note> postsData = new ArrayList<>();
+        if (cursorPosts.moveToFirst()) {
+            do {
+                postsData.add(new Note(
                         cursorPosts.getString(cursorPosts.getColumnIndex("title")), 
                         cursorPosts.getString(cursorPosts.getColumnIndex("text")), 
                         cursorPosts.getString(cursorPosts.getColumnIndex("time")), 
                         cursorPosts.getString(cursorPosts.getColumnIndex("pathimg")), 
                         cursorPosts.getInt(cursorPosts.getColumnIndex("importance"))
                         ));
-        } while (cursorPosts.moveToNext());
-        // moving our cursor to next.
-    }
-    // at last closing our cursor
-    // and returning our array list.
-    cursorPosts.close();
-    return postsData;
+            } while (cursorPosts.moveToNext());
+        }
+        cursorPosts.close();
+        return postsData;
     }
 
     @Override
@@ -460,10 +456,12 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.edit){
             Toast.makeText(getApplicationContext(),"Edit " + selectedNote.getText(),Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_edit);
+
             return true;
         }  
         else if(item.getItemId()==R.id.delete){  
             Toast.makeText(getApplicationContext(),"Delete elem " + Integer.toString(position),Toast.LENGTH_LONG).show();
+            dbHandler.deletePost(states.get(position).getTitle());
             states.remove(position);
             Intent intent = new Intent(this, MainActivity.class);
             intent.putParcelableArrayListExtra("state", states); 
@@ -626,14 +624,17 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 
     public void editMessage(View view) {
-         
+        
         EditText editTitle = findViewById(R.id.title_edit);
         EditText editNote = findViewById(R.id.note_edit);
-            
+        
+        String titleBefore = selectedNote.getTitle(); 
         selectedNote.setTitle(editTitle.getText().toString());
         selectedNote.setText(editNote.getText().toString());
     
+        dbHandler.editPost(titleBefore,selectedNote);          
 
+        
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("selectedNote", selectedNote);
         intent.putParcelableArrayListExtra("state", states); 
@@ -642,7 +643,6 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
     public void sendMessage(View view) {
-
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.putParcelableArrayListExtra("state", states);
