@@ -71,6 +71,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.SeekBar;
+import android.widget.TimePicker;
+import android.content.res.Configuration;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 class NumberComparatorMinToMax implements Comparator<Note> {
    @Override
@@ -383,11 +388,15 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     Locale locale;
     SQLiteDatabase db;
-
+    private static int sTheme;
     private DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+        //setTheme(R.style.AppTheme);
+        //setTheme(R.style.OrangeTheme);
+        if(sTheme!=0){
+            setTheme(sTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -409,6 +418,9 @@ public class MainActivity extends AppCompatActivity {
         stateAdapter = new StateAdapter(this, R.layout.list_item, states);
         notesList.setAdapter(stateAdapter);
         search();
+
+
+
         AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -479,8 +491,11 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.add_note){
             setContentView(R.layout.activity_text);
             return true;
-        }
-        else if (id == R.id.filter_min){
+        }else if (id == R.id.settings){
+            setContentView(R.layout.settings);
+            fontsizeOption();
+            return true;
+        }else if (id == R.id.filter_min){
             sortStatesByImportanceDescending();
             return true;
         }else if (id == R.id.filter_max){
@@ -504,10 +519,51 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putParcelableArrayListExtra("state", states); 
             startActivity(intent); 
+        }else if (id == R.id.theme_select_one){
+            //setTheme(R.style.OrangeTheme);
+            sTheme = R.style.OrangeTheme;
+            recreate();
+            //setContentView(R.layout.activity_main);
+        }else if (id == R.id.theme_select_two){
+            //setTheme(R.style.AppTheme);
+            sTheme = R.style.AppTheme;
+            recreate();
+            //setContentView(R.layout.activity_main);
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+    public void fontsizeOption(){
+        SeekBar seekBar = findViewById(R.id.seekBar);
+        TextView textView = findViewById(R.id.seekBarValue);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                adjustFontScale(getResources().getConfiguration(), (float)progress);
+                textView.setText(String.valueOf(progress));
+            }
+ 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+ 
+            }
+ 
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+ 
+            }
+        });
+    }
+    // configuration -- getResources().getConfiguration()
+    public void adjustFontScale(Configuration configuration,float scale) {
+
+        configuration.fontScale = scale * 0.1f; //coefficient for adjustment
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+        getBaseContext().getResources().updateConfiguration(configuration, metrics);
     }
 private String saveBitmapToFile(Bitmap bitmap) {
     File filesDir = getFilesDir();
@@ -654,7 +710,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     public void onDestroy() {
         super.onDestroy();
         // Закрываем подключение и курсор
-        db.close();
+        //db.close();
 
     }
 }

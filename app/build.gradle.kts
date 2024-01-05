@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.1.0-alpha09")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.8.5")

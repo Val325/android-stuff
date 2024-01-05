@@ -20,4 +20,8 @@
     <string name="eng_submenu">Англійська</string>
     <string name="ua_submenu">Українська</string>
     <string name="search">Пошук</string>
+    <string name="themes">Теми</string>
+    <string name="orange_theme">Помаранчевий</string>
+    <string name="green_theme">Зелений</string>
+    <string name="font_size">Розмір шрифту</string>    
 </resources>

@@ -20,4 +20,8 @@
     <string name="eng_submenu">English</string>
     <string name="ua_submenu">Ukranian</string>
     <string name="search">Search</string>
+    <string name="themes">Themes</string>
+    <string name="orange_theme">Orange</string>
+    <string name="green_theme">Green</string>
+    <string name="font_size">Font size</string>
 </resources>

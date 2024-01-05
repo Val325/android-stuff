@@ -13,16 +13,27 @@
         android:id="@+id/add_note"
         android:orderInCategory="3"
         android:title="@string/add_note" />
-
-
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="4"
+        android:title="@string/menu_settings" />
     <item 
         android:id="@+id/lan_select" 
         android:title="@string/languages_submenu"
-        android:orderInCategory="4">
+        android:orderInCategory="5">
         <menu> 
             <item android:id="@+id/lan_select_one" android:title="@string/eng_submenu" /> 
             <item android:id="@+id/lan_select_two" android:title="@string/ua_submenu" /> 
         </menu> 
-    </item> 
+    </item>
 
+    <item 
+        android:id="@+id/themes_select" 
+        android:title="@string/themes"
+        android:orderInCategory="6">
+        <menu> 
+            <item android:id="@+id/theme_select_one" android:title="@string/orange_theme" /> 
+            <item android:id="@+id/theme_select_two" android:title="@string/green_theme" /> 
+        </menu> 
+    </item> 
 </menu>

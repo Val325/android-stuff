@@ -1,0 +1,7 @@
+<declare-styleable name="Theme">
+    <attr name="colorOrange" format="color|reference" />
+    <attr name="colorPrimOrange" format="color|reference" />
+    <attr name="colorAcOrange" format="color|reference" />
+</declare-styleable>
+
+
